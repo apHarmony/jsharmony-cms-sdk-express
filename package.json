@@ -1,0 +1,39 @@
+{
+  "name": "jsharmony-cms-sdk-express",
+  "version": "1.0.1",
+  "description": "jsHarmony CMS SDK for Node.js / Express",
+  "main": "jsHarmonyCmsRouter.js",
+  "scripts": {
+    "build": "uglifyjs clientjs/jsHarmonyCmsEditor.js --comments /^!/ > clientjs/jsHarmonyCmsEditor.min.js",
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apHarmony/jsharmony-cms-sdk-express"
+  },
+  "keywords": [
+    "jsHarmony",
+    "CMS",
+    "content",
+    "SDK",
+    "JavaScript",
+    "JS",
+    "Node",
+    "Node.js",
+    "Express",
+    "Express.js"
+  ],
+  "author": "apHarmony <contact@apharmony.com> (http://www.apharmony.com/)",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/apHarmony/jsharmony-cms-sdk-express/issues"
+  },
+  "homepage": "https://github.com/apHarmony/jsharmony-cms-sdk-express",
+  "devDependencies": {},
+  "dependencies": {
+    "serve-static": "^1.0.0"
+  },
+  "bin": {
+    "jsharmony-cms-sdk-express": "./jsHarmonyCmsRouter.js"
+  }
+}

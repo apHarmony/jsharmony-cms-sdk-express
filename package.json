@@ -1,6 +1,6 @@
 {
   "name": "jsharmony-cms-sdk-express",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "jsHarmony CMS SDK for Node.js / Express",
   "main": "jsHarmonyCmsRouter.js",
   "scripts": {

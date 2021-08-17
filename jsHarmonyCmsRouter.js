@@ -64,7 +64,7 @@ function jsHarmonyCmsRouter(config){
   //      serveRedirects: (bool) Whether the router should serve redirects
   //      servePages:     (bool) Whether the router should serve pages, based on the request URL
   //      serveCmsEditorScript:  (bool) Whether the router should serve the CMS Editor Launcher script at config.cms_clientjs_editor_launcher_path
-  //      generate404OnNotfound: (bool) Whether the router should generate a 404 page if no matching page was found
+  //      generate404OnNotFound: (bool) Whether the router should generate a 404 page if no matching page was found
   //  }
   //Returns (function) Express.js Route
   this.getRouter = function(options){
@@ -73,7 +73,7 @@ function jsHarmonyCmsRouter(config){
       serveRedirects: true,
       servePages: true,
       serveCmsEditorScript: true,
-      generate404OnNotfound: false,
+      generate404OnNotFound: false,
     }, options);
     if(!_this.content_path) return _this.onError(new Error('CMS Configuration Error - content_path parameter is required'), req, res, next);
     var staticRouter = (options.serveContent ? ServeStatic(_this.content_path) : function(req, res, next){ return next(); });
@@ -111,7 +111,7 @@ function jsHarmonyCmsRouter(config){
           if(ex.name=='PageNotFoundError'){ /* 404 */ }
           else return _this.onError(ex, req, res, next);
         }
-        if(options.generate404OnNotfound) return _this.generate404(req, res, next);
+        if(options.generate404OnNotFound) return _this.generate404(req, res, next);
         else if(next) return next();
       });
     }

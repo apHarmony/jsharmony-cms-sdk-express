@@ -42,7 +42,7 @@ jsHarmony CMS SDK for Node.js / Express
 
    ```js
    //Assuming "app" is your Express Router - app = express()
-   app.use(cmsRouter.getRouter({ generate404OnNotfound: true }));
+   app.use(cmsRouter.getRouter({ generate404OnNotFound: true }));
    ```
 
    g. Copy the client-side template Integration Code into your CMS Page Template:
@@ -182,7 +182,7 @@ cmsRouter.onRedirect = function(redirect, req, res, next){ /* return false to no
       serveCmsEditorScript: (bool)
       //(Optional, default true) Whether the router should serve the CMS Editor Launcher script at config.cms_clientjs_editor_launcher_path
 
-      generate404OnNotfound: (bool)
+      generate404OnNotFound: (bool)
       //(Optional, default false) Whether the router should generate a 404 page if no matching page was found
    }
    ```
@@ -190,7 +190,7 @@ cmsRouter.onRedirect = function(redirect, req, res, next){ /* return false to no
 `(function)` Express.js Route
 #### Example
 ```js
-app.use(cmsRouter.getRouter({ generate404OnNotfound: true }));
+app.use(cmsRouter.getRouter({ generate404OnNotFound: true }));
 ```
 
 ---

@@ -3,64 +3,13 @@ jsHarmony CMS SDK for Node.js / Express
 
 ## Installation
 
-1. Install "jsharmony-cms-sdk-express" in your project:
-
-   ```
-   npm install jsharmony-cms-sdk-express
-   ```
-
-2. Configure the Deployment Target in the jsHarmony CMS:
-
-   a. In the jsHarmony CMS, open the "Sites" tab
-
-   b. Click "Configure Site" on the target site
-
-   c. Add a new Deployment Target, setting the publish folder to a subfolder in your project
-
-3. Add the Integration Code:
-
-   a. In the jsHarmony CMS, open the "Sites" tab
-
-   b. Click "Configure Site" on the target site
-
-   c. Select and edit the Deployment Target
-
-   d. Select the "Integration Code" tab in the Deployment Target
-
-   e. Copy the server-side Integration Code into your Node.js / Express.js application, for example:
-
-   ```js
-   const jsHarmonyCmsRouter = require('jsharmony-cms-sdk-express').Router;
-   const cmsRouter = new jsHarmonyCmsRouter({
-       content_path: "data/content/",
-       redirect_listing_path: "jshcms_redirects.json",
-       cms_server_urls: ["https://cms.example.com/"]
-   });
-   ```
-
-   f. Add the Router into your Express.js application:
-
-   ```js
-   //Assuming "app" is your Express Router - app = express()
-   app.use(cmsRouter.getRouter({ generate404OnNotFound: true }));
-   ```
-
-   g. Copy the client-side template Integration Code into your CMS Page Template:
-
-   ```html
-   <script type="text/javascript" class="removeOnPublish" src="/.jsHarmonyCms/jsHarmonyCmsEditor.js"></script>
-   <script type="text/javascript" class="removeOnPublish">
-   jsHarmonyCmsEditor({"access_keys":["xxxxxxxxxxxxxxxxxxxxxxx"]});
-   </script>
-   ```
-   
-4. Publish the content to the target folder, and test
+Installation and integration instructions are available at [jsHarmonyCMS.com](https://www.jsharmonycms.com/resources/integrations/node-js-express-js/)
 
 ## API Documentation
 
 ## *jsHarmonyCmsRouter Class*
 
-* [Constructor](#constructor)
+* [Constructor](#jsharmonycmsrouter-constructor)
 * *Public Properties*
    * [onError](#onerror)
    * [onPageRender](#onpagerender)
@@ -81,7 +30,7 @@ jsHarmony CMS SDK for Node.js / Express
 
 ---
 
-## Constructor
+## jsHarmonyCmsRouter Constructor
 
 ```js
 new jsHarmonyCmsRouter(config)

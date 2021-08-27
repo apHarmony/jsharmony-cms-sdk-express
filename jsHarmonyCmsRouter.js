@@ -29,7 +29,7 @@ function jsHarmonyCmsRouter(config){
   //Parameters
   //==========
   config = extend({
-    content_path: null,             //(string) File path to published CMS content files
+    content_path: '.',              //(string) File path to published CMS content files
     redirect_listing_path: null,    //(string) Path to redirect listing JSON file (relative to content_path)
     default_document: 'index.html', //(string) Default Directory Document
     strict_url_resolution: false,   //(bool) Whether to support URL variations (appending "/" or Default Document)
@@ -57,7 +57,7 @@ function jsHarmonyCmsRouter(config){
   //Public Functions
   //================
 
-  //Router [Main Entry Point] - CMS Express.js Router Application
+  //getRouter [Main Entry Point] - CMS Express.js Router Application
   //Parameters:
   //  options: (object) {
   //      serveContent:   (bool) Whether the router should serve static content from config.content_path
@@ -142,6 +142,7 @@ function jsHarmonyCmsRouter(config){
   //  properties: {
   //      <property_name>: <property_value>
   //  }
+  //  page_template_id (string),
   //  isInEditor (bool),     //Whether the page was opened from the CMS Editor
   //  editorScript (string), //If page was opened from a CMS Editor in config.cms_server_urls, the HTML script to launch the Editor
   //  notFound (bool)        //Whether the page was Not Found (page data will return empty)
@@ -268,19 +269,20 @@ function jsHarmonyCmsRouter(config){
   //  title (string),      //Title for Page Body Content
   //  content: {
   //      <content_area_name>: <content> (string)
-  //  }
+  //  },
   //  properties: {
   //      <property_name>: <property_value>
-  //  }
+  //  },
+  //  page_template_id (string)
   //}
-  this.getPageData = async function(orig_url, options){
+  this.getPageData = async function(url, options){
     options = _this.extend({
       variation: 1,
     }, options);
 
     var pageData = null;
     try{
-      var pageFile = await _this.getPageFile(orig_url, options);
+      var pageFile = await _this.getPageFile(url, options);
       var pageData = JSON.parse(pageFile);
     }
     catch(ex){
@@ -298,12 +300,12 @@ function jsHarmonyCmsRouter(config){
   //         Use Full URL, Root-relative URL
   //  options: (object) { variation: (int) }
   //Returns (string) Page Content
-  this.getPageFile = async function(orig_url, options){
+  this.getPageFile = async function(url, options){
     options = _this.extend({
       variation: 1,
     }, options);
 
-    var contentPath = _this.resolve(orig_url, options);
+    var contentPath = _this.resolve(url, options);
     var content = null;
     try{
       content = await _this.getFile(contentPath);
@@ -311,7 +313,7 @@ function jsHarmonyCmsRouter(config){
     catch(ex){
       if((ex.code=='ENOENT')||(ex.code=='EISDIR')){
         options.variation++;
-        return _this.getPageFile(orig_url, options);
+        return _this.getPageFile(url, options);
       }
       throw ex;
     }
@@ -377,7 +379,7 @@ function jsHarmonyCmsRouter(config){
     return '<script type="text/javascript" src="'+_this.escapeHTMLAttr(_this.joinUrlPath(cms_server_url,'/js/jsHarmonyCMS.js'))+'"></script>';
   }
 
-  //Check if URL matches redirects and return first match
+  //matchRedirect - Check if URL matches redirects and return first match
   //Parameters:
   //  redirects: Array(object) Array of CMS Redirects
   //  url: (string) Target URL

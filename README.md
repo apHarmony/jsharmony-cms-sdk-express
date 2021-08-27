@@ -5,9 +5,13 @@ jsHarmony CMS SDK for Node.js / Express
 
 Installation and integration instructions are available at [jsHarmonyCMS.com](https://www.jsharmonycms.com/resources/integrations/node-js-express-js/)
 
+---
+
 ## API Documentation
 
-## *jsHarmonyCmsRouter Class*
+---
+
+### *jsHarmonyCmsRouter*
 
 * [Constructor](#jsharmonycmsrouter-constructor)
 * *Public Properties*
@@ -23,14 +27,22 @@ Installation and integration instructions are available at [jsHarmonyCMS.com](ht
    * [getPageData](#getpagedata)
    * [getPageFile](#getpagefile)
    * [getRedirectData](#getredirectdata)
-   * [getEditorScript](#getEditorScript)
+   * [getEditorScript](#geteditorscript)
    * [matchRedirect](#matchredirect)
    * [generate404](#generate404)
    * [generateError](#generateerror)
 
+### *jsHarmonyCmsEditor* Class (Client JS)
+
+* [Constructor](#jsharmonycmseditor-constructor)
+
 ---
 
-## jsHarmonyCmsRouter Constructor
+## *jsHarmonyCmsRouter Class*
+
+---
+
+### jsHarmonyCmsRouter Constructor
 
 ```js
 new jsHarmonyCmsRouter(config)
@@ -176,6 +188,7 @@ Page Object {
   properties: {
       <property_name>: <property_value>
   },
+  page_template_id: (string),
   isInEditor: (bool),     //Whether the page was opened from the CMS Editor
   editorScript: (string), //If page was opened from a CMS Editor in config.cms_server_urls, the HTML script to launch the Editor
   notFound: (bool)        //Whether the page was Not Found (page data will return empty)
@@ -239,7 +252,7 @@ var contentPath = cmsRouter.resolve(targetUrl);
 ### route
 `<jsHarmonyCmsRouter>.route(url)`
 
-Run client-side CMS router on the target URL
+Run CMS router on the target URL
 #### Parameters
 * `url: (string)` CMS Page URL
 
@@ -303,7 +316,8 @@ Page Object {
   },
   properties: {
       <property_name>: <property_value>
-  }
+  },
+  page_template_id: (string)
 }
 ```
 #### Example
@@ -427,9 +441,9 @@ cmsRouter.generate404(req, res);
 ---
 
 ### generateError
-`<jsHarmonyCmsRouter>.generate404(req, res, err)`
+`<jsHarmonyCmsRouter>.generateError(req, res, err)`
 
-Generate a 404 Not Found page in Express.js
+Generate a 500 Error page in Express.js
 #### Parameters
 * `req: (object)` Express.js Request
 * `res: (object)` Express.js Response
@@ -442,13 +456,11 @@ cmsRouter.generateError(req, res, 'An unexpected error has occurred.');
 
 ---
 
-## *jsHarmonyCmsEditor Class*
-
-* [Constructor](#jsharmonycmseditor-constructor)
+## *jsHarmonyCmsEditor Class (Client JS)*
 
 ---
 
-## jsHarmonyCmsEditor Constructor
+### jsHarmonyCmsEditor Constructor
 
 ```js
 jsHarmonyCmsEditor(config)
@@ -467,5 +479,5 @@ jsHarmonyCmsEditor(config)
 #### Example
 ```js
 //Load the CMS Editor in this page
-jsHarmonyCmsEditor({ access_keys: ['xxxxxxxxxxxxxxxxxxxxxx'] });
+jsHarmonyCmsEditor({ access_keys: ['*****ACCESS_KEY*****'] });
 ```
